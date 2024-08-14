@@ -1,0 +1,11 @@
+class Solution {
+  public:
+    int minValue(Node* root) {
+        int mini=0;
+        while(root!=NULL ){
+            mini=root->data;
+            root=root->left;
+        }
+        return mini;
+    }
+};
