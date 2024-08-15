@@ -1,0 +1,53 @@
+class Solution {
+public:
+    TreeNode* findlastRightNode(TreeNode* root){
+        while(root->right){
+            root=root->right;
+        }
+        return root;
+    }
+
+    TreeNode* helper(TreeNode* root){
+        if(root->left==NULL){
+            return root->right;
+        }
+        if(root->right==NULL){
+            return root->left;
+        }
+        TreeNode* r= root->right;
+        TreeNode* l= findlastRightNode(root->left);
+        l->right=r;
+        return root->left;
+    }
+
+
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(root==NULL){return root;}
+        if(root->val==key){
+            return helper(root);
+        }
+        TreeNode* cur=root;
+        while(cur!=NULL){
+            if(cur->val>key){
+                if(cur->left && cur->left->val==key){
+                    cur->left=helper(cur->left);
+                   break;
+                }
+                else{
+                    cur=cur->left;
+                }
+            }
+            else{
+                if(cur->right && cur->right->val==key){
+                    cur->right= helper(cur->right);
+                    break;
+                }
+                else{
+                    cur=cur->right;
+                }
+            }
+
+        }
+        return root;
+    }
+};
