@@ -1,0 +1,15 @@
+
+    bool helper(TreeNode* root, long long mini, long long maxi){
+        if(root==NULL ){
+            return true;
+        }
+        if(root->val < maxi && root->val > mini){
+        return helper(root->left,mini,root->val) && helper(root->right,root->val,maxi);
+        }
+        return false;
+    }
+    bool isValidBST(TreeNode* root) {
+        long long int mini = -1000000000000, maxi = 1000000000000;
+        return helper(root,mini,maxi);
+        
+    }
