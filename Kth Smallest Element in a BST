@@ -1,0 +1,26 @@
+int kthSmallest(TreeNode* root, int k){
+        int c=0;
+        int ans;
+        TreeNode* cur=root;
+        stack<TreeNode*>s;
+        s.push(cur);
+        while(cur!=NULL || !s.empty()){
+            if(cur){
+                s.push(cur);
+                cur=cur->left;
+            }
+            else{
+                cur=s.top();
+                s.pop();
+                c++;
+                if(k==c){
+                    ans= cur->val;
+                  break;
+                }
+                cur=cur->right;
+            }
+
+        }
+        return ans;
+    }
+   
